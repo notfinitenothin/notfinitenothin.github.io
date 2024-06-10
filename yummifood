@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Keypad</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  #keypad {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  .key {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>Secret Keypad</h1>
+
+<div>
+  <input type="text" id="inputField" readonly style="font-size: 24px; margin-bottom: 10px;">
+</div>
+
+<div id="keypad">
+  <button class="key" onclick="pressKey(1)">1</button>
+  <button class="key" onclick="pressKey(2)">2</button>
+  <button class="key" onclick="pressKey(3)">3</button>
+  <button class="key" onclick="pressKey(4)">4</button>
+  <button class="key" onclick="pressKey(5)">5</button>
+  <button class="key" onclick="pressKey(6)">6</button>
+  <button class="key" onclick="pressKey(7)">7</button>
+  <button class="key" onclick="pressKey(8)">8</button>
+  <button class="key" onclick="pressKey(9)">9</button>
+  <button class="key" onclick="pressKey(0)">0</button>
+</div>
+
+<div style="margin-top: 20px;">
+  <button class="key" onclick="backspace()">Backspace</button>
+  <button class="key" onclick="checkCode()">Check</button>
+</div>
+
+<div id="secret" style="display: none;">
+  <h2>Secret Unlocked!</h2>
+  <p>The secret word is: <strong>Hello</strong></p>
+</div>
+
+<script>
+  // JavaScript code
+  let input = "";
+  const inputField = document.getElementById("inputField");
+  const secretDiv = document.getElementById("secret");
+
+  function pressKey(key) {
+    input += key;
+    updateInputField();
+  }
+
+  function backspace() {
+    input = input.slice(0, -999
+    );
+    updateInputField();
+  }
+
+  function checkCode() {
+    if (input === "0961") {
+      secretDiv.style.display = "block";
+      setTimeout(function() {
+        secretDiv.style.display = "none";
+        input = "";
+        updateInputField();
+      }, 4000); // Hides secret after 4 seconds
+    } else {
+      alert("Incorrect code!");
+      backspace(); // Backspaces incorrect code
+    }
+  }
+
+  function updateInputField() {
+    inputField.value = input;
+  }
+</script>
+
+</body>
+</html>
+
